@@ -1,42 +1,23 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+// import data from '../data';
 import Question from './Question';
 import AskQuestion from './AskQuestion';
 import './Questions.css';
 
 class Questions extends Component {
-  constructor() {
+  constructor(props) {
     super();
     this.state = {
-      questions: [
-        {
-          id: 1,
-          name: 'Frank Rocha ',
-          question: 'Desafio MAROTO! Passou no ESLint?',
-          answered: false,
-          votes: 0,
-        },
-        {
-          id: 2,
-          name: 'Gustavo Caetano ',
-          question: 'Esse desafio foi MARAVILHOSO???',
-          answered: false,
-          votes: 0,
-        },
-        {
-          id: 3,
-          name: 'Oliva',
-          question: 'Cadê o comitão BOMBA!!!!????',
-          answered: false,
-          votes: 0,
-        },
-      ],
+      questions: [...props.data],
       sortVotes: false,
     };
     this.addQuestion = this.addQuestion.bind(this);
     this.addIdAnswer = this.addIdAnswer.bind(this);
     this.updateQuestions = this.updateQuestions.bind(this);
     this.handlerChange = this.handlerChange.bind(this);
+    this.updateData = this.updateData.bind(this);
   }
 
   handlerChange({ target }) {
@@ -44,6 +25,12 @@ class Questions extends Component {
     this.setState({
       sortVotes: checked,
     });
+  }
+
+  updateData() {
+    const { questions } = this.state;
+    const { getArray } = this.props;
+    getArray(questions);
   }
 
   addIdAnswer(createNewQuestion) {
@@ -70,6 +57,8 @@ class Questions extends Component {
 
     this.setState({
       questions: [...arrayQuestions],
+    }, () => {
+      this.updateData();
     });
   }
 
@@ -79,6 +68,8 @@ class Questions extends Component {
     console.log(newQuestion);
     this.setState({
       questions: [...questions, createdQuestion],
+    }, () => {
+      this.updateData();
     });
   }
 
@@ -94,9 +85,13 @@ class Questions extends Component {
     console.log(sortedVotes);
 
     return (
-      <div className="HOME-questions">
+      <div className="home-questions">
+        <h1>Desafio Clone do Sli.do</h1>
         <div className="ask-question">
           <AskQuestion addQuestion={ this.addQuestion } />
+        </div>
+        <div className="link-respondidas">
+          <Link to="/respondidas">Ver respondidas</Link>
         </div>
         <div className="type-sort">
           <label htmlFor="checkbox-votes">
@@ -109,7 +104,7 @@ class Questions extends Component {
             />
           </label>
         </div>
-        <div>
+        <div className="list-questions">
           {
             sortedVotes.map((item) => (<Question
               key={ item.id }
@@ -130,4 +125,10 @@ Questions.propTypes = {
     name: PropTypes.string.isRequired,
     question: PropTypes.string.isRequired,
   }).isRequired,
+  data: PropTypes.arrayOf(
+    PropTypes.oneOfType(
+      [PropTypes.string, PropTypes.number, PropTypes.bool],
+    ),
+  ).isRequired,
+  getArray: PropTypes.func.isRequired,
 };

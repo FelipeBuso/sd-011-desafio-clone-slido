@@ -1,0 +1,24 @@
+* {
+  margin: 0;
+}
+
+.reply-questions-section {
+  display: flex;
+  flex-direction: column;
+  background-color: #FFFF8A;
+  width: 80%;
+  /* min-height: 600px; */
+  margin: 15px auto 0;
+}
+
+.reply-questions-section h1 {
+  text-align: center;
+  margin: 20px;
+}
+
+.link-voltar {
+  /* font-style: none; */
+  padding: 10px;
+  width: 70%;
+  margin: 0 auto;
+}

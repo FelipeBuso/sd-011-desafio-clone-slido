@@ -47,7 +47,7 @@ class Question extends Component {
     return (
       <div className="question-section">
         <div className="top-question-section">
-          <p className="user-question">{ name }</p>
+          <p className="user-question-name">{ name }</p>
           <label htmlFor="button-votes">
             <button
               type="button"
@@ -59,7 +59,7 @@ class Question extends Component {
           </label>
         </div>
         <div className="botton-question-section">
-          <p className="question">{ question }</p>
+          <p className="user-question">{ question }</p>
           <label htmlFor="answer">
             <input
               type="checkbox"

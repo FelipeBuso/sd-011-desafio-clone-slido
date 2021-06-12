@@ -34,24 +34,22 @@ class AskQuestion extends Component {
     return (
       <div className="ask-question-section">
         <div className="ask-a-question">
-          <label htmlFor="question">
+          <label htmlFor="ask-question">
             <textarea
               name="question"
-              className="question"
+              className="ask-question-textarea"
               onChange={ this.handleChange }
               value={ question }
-              rows="5"
-              cols="10"
               placeholder="Digite sua pergunta"
             />
           </label>
         </div>
         <div className="name-question">
-          <label htmlFor="name">
+          <label htmlFor="ask-name">
             <input
               type="text"
               name="name"
-              className="name"
+              className="ask-name-input"
               onChange={ this.handleChange }
               value={ name }
               placeholder="Digite seu nome"
